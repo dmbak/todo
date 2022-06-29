@@ -48,26 +48,29 @@
     float: right;
   }
 </style>
+<h3>
+  Hello {{ request.user }} </h3>
+  <a href="{% url 'logout' %}">Logout</a>
+  <div class="center-column">
+    <form method="POST" action="/">
+      {% csrf_token %} {{form.title}}
+      <input class="btn sub-btn btn-info" type="submit" name="Create Task" />
+    </form>
 
-<div class="center-column">
-  <form method="POST" action="/">
-    {% csrf_token %} {{form.title}}
-    <input class="btn sub-btn btn-info" type="submit" name="Create Task" />
-  </form>
-
-  <div class="todo-list">
-    {% for task in tasks %}
-    <div class="item-row">
-      {% if task.complete == True %}
-      <strike>{{task}}</strike>
-      {% else %}
-      <span>{{task}}</span>
-      {% endif %}
-      <a class="btn btn-sm btn-danger" href="{% url 'delete' task.id %}">X</a>
-      <a class="btn btn-sm btn-info" href="{% url 'update_task' task.id %}"
-        >Update</a
-      >
+    <div class="todo-list">
+      {% for task in tasks %}
+      <div class="item-row">
+        {% if task.complete == True %}
+        <strike>{{task}}</strike>
+        {% else %}
+        <span>{{task}}</span>
+        {% endif %}
+        <a class="btn btn-sm btn-danger" href="{% url 'delete' task.id %}">X</a>
+        <a class="btn btn-sm btn-info" href="{% url 'update_task' task.id %}"
+          >Update</a
+        >
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
-</div>
+</h2>
